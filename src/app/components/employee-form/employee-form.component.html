@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      @if(isEdit){ Edit Employee Form }@else { Create Employee Form }
+    </mat-card-title>
+  </mat-card-header>
+  <br />
+  <mat-card-content>
+    <div>
+      <form [formGroup]="employeeForm" (ngSubmit)="save()">
+        <div class="w-full flex flex-wrap">
+          <mat-form-field class="w-full">
+            <mat-label>Name</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Ex. Tony Stark"
+              formControlName="name"
+            />
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-wrap">
+          <mat-form-field class="w-full">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              placeholder="Ex. ironman@example.com"
+              formControlName="email"
+            />
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-wrap">
+          <mat-form-field class="w-full">
+            <mat-label>Phone</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Ex. 9876543210"
+              formControlName="phone"
+            />
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-wrap">
+          <mat-form-field class="w-full">
+            <mat-label>Age</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="Ex. 21"
+              formControlName="age"
+            />
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-wrap">
+          <mat-form-field class="w-full">
+            <mat-label>Salary</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="Ex. 5000"
+              formControlName="salary"
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex justify-center">
+          @if(isEdit){
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!employeeForm.valid"
+          >
+            Update
+          </button>
+          }@else{
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!employeeForm.valid"
+          >
+            Add
+          </button>
+          }
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
