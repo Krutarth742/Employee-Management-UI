@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        @if(isEdit){ Edit Department Form }@else { Create Department Form }
+      </mat-card-title>
+    </mat-card-header>
+    <br />
+    <mat-card-content>
+      <div>
+        <form [formGroup]="departmentForm" (ngSubmit)="save()">
+          <div class="w-full flex flex-wrap">
+            <mat-form-field class="w-full">
+              <mat-label>Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Ex. Java, DevOps etc."
+                formControlName="departmentName"
+              />
+            </mat-form-field>
+          </div>
+          <div class="flex justify-center">
+            @if(isEdit){
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!departmentForm.valid"
+            >
+              Update
+            </button>
+            }@else{
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!departmentForm.valid"
+            >
+              Add
+            </button>
+            }
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

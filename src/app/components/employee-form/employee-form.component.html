@@ -17,6 +17,15 @@
               placeholder="Ex. Tony Stark"
               formControlName="name"
             />
+            <mat-error *ngIf="employeeForm.get('name')?.hasError('required')">
+              Name is required
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('name')?.hasError('minlength')">
+              Name must be at least 2 characters
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('name')?.hasError('maxlength')">
+              Name cannot exceed 100 characters
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="w-full flex flex-wrap">
@@ -28,6 +37,32 @@
               placeholder="Ex. ironman@example.com"
               formControlName="email"
             />
+            <mat-error *ngIf="employeeForm.get('email')?.hasError('required')">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('email')?.hasError('email')">
+              Invalid email format
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="w-full flex flex-wrap">
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Ex. IronMan@123"
+              formControlName="password"
+            />
+            <mat-error *ngIf="employeeForm.get('password')?.hasError('required')">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('password')?.hasError('minlength')">
+              Password must be at least 6 characters
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('password')?.hasError('maxlength')">
+              Password cannot exceed 100 characters
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="w-full flex flex-wrap">
@@ -39,6 +74,12 @@
               placeholder="Ex. 9876543210"
               formControlName="phone"
             />
+            <mat-error *ngIf="employeeForm.get('phone')?.hasError('required')">
+              Phone number is required
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('phone')?.hasError('phoneLength')">
+              Phone number must be exactly 10 digits
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="w-full flex flex-wrap">
@@ -50,6 +91,15 @@
               placeholder="Ex. 21"
               formControlName="age"
             />
+            <mat-error *ngIf="employeeForm.get('age')?.hasError('required')">
+              Age is required
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('age')?.hasError('min')">
+              Age must be at least 18
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('age')?.hasError('max')">
+              Age cannot exceed 65
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="w-full flex flex-wrap">
@@ -61,9 +111,34 @@
               placeholder="Ex. 5000"
               formControlName="salary"
             />
+            <mat-error *ngIf="employeeForm.get('salary')?.hasError('required')">
+              Salary is required
+            </mat-error>
+            <mat-error *ngIf="employeeForm.get('salary')?.hasError('min')">
+              Salary must be a positive number
+            </mat-error>
           </mat-form-field>
         </div>
-        <div class="flex justify-center">
+        <div class="w-full flex flex-wrap">
+          <div class="w-full">
+            <label for="departmentID" class="block text-sm font-medium text-gray-700">Department</label>
+            <select
+              id="departmentID"
+              formControlName="departmentID"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+            >
+              <option value="">Select a department</option>
+              <option *ngFor="let dept of departmentList" [value]="dept.departmentID">
+                {{ dept.departmentName }}
+              </option>
+            </select>
+            <div *ngIf="employeeForm.get('departmentID')?.hasError('required') && employeeForm.get('departmentID')?.touched"
+                 class="text-red-600 text-sm mt-1">
+              Department is required
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center mt-2">
           @if(isEdit){
           <button
             mat-raised-button
